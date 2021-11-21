@@ -1,0 +1,42 @@
+version: "3.3"
+services:
+  prometheus:
+    image: prom/prometheus:v2.31.1
+    ports:
+      - "8088:9090"
+    volumes:
+      - "/data/smart_home_config/prometheus.yaml:/etc/prometheus/prometheus.yml"
+      - "prometheus-data:/prometheus"
+    restart: always
+  rs485-to-grpc:
+    image: pejs77/grpc-modbus-adapter:1.0.46
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+      - "5005:5005"
+      - "6001:6001"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=home"
+    volumes:
+      - "/data/smart_home_config/grpc_modbus_application-home.yaml:/BOOT-INF/classes/application-home.yaml"
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 90s
+      timeout: 10s
+      retries: 5
+volumes:
+  mysql_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /data/smart_home_config/db
+  prometheus-data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /d/smart_home_config/prometheus

@@ -1,0 +1,17 @@
+ports:
+  entries:
+    - name: /dev/ttyUSB0
+      baudRate: 9600
+      dataBits: 8
+      parity: NONE
+      stopBits: STOPBITS_1
+devices:
+  entries:
+    - name: ProductionMeter
+      id: 1
+      serialPort: /dev/ttyUSB0
+      deviceFunctions: [TOTAL_POWER, EXPORT_POWER, IMPORT_POWER, CURRENT_POWER]
+    - name: MainMeter
+      id: 2
+      serialPort: /dev/ttyUSB0
+      deviceFunctions: [TOTAL_POWER, EXPORT_POWER, IMPORT_POWER, CURRENT_POWER]
