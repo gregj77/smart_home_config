@@ -9,6 +9,17 @@ services:
       - "/data/smart_home_config/prometheus.yaml:/etc/prometheus/prometheus.yml"
       - "prometheus_data:/prometheus"
     restart: always
+  grafana:
+    image: grafana/grafana-oss:8.2.5
+    user: "472:1001"
+    ports:
+      - "3000:3000"
+    volumes:
+#      - "grafana_data:/var/lib/grafana"
+      - "/data/smart_home_config/grafana_source.yaml:/etc/grafana/provisioning/datasources/primary.yaml"
+      - "/data/smart_home_config/grafana_dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml"
+      - "/data/smart_home_config/dashboards/spring-boot-statistics_rev2.json:/smart_home/dashboards/spring-boot-statistics_rev2.json"
+    restart: always
   mysql:
     image: mysql:8.0.27
     user: "0:1001"
@@ -25,9 +36,9 @@ services:
     image: pejs77/grpc-modbus-adapter:1.0.46
     ports:
       - "8081:8080"
-      - "9090:9090"
-      - "5005:5005"
-      - "6001:6001"
+#      - "9090:9090"
+#      - "5005:5005"
+#      - "6001:6001"
     environment:
       - "SPRING_PROFILES_ACTIVE=home"
     volumes:
@@ -69,3 +80,9 @@ volumes:
       o: bind
       type: none
       device: /data/var/prometheus
+  grafana_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /data/var/grafana

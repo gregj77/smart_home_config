@@ -1,0 +1,9 @@
+datasources:
+  - name: "smart-home"
+    type: "prometheus"
+    is_default: true
+    is_editable: false
+    org_id: 1
+    version: 1
+    url: "http://prometheus:9090"
+
