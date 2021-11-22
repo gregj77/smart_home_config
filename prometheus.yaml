@@ -9,12 +9,12 @@ scrape_configs:
   - job_name: "grpc_adapter"
     metrics_path: /actuator/prometheus
     static_configs:
-      - targets: ["rs485-to-grpc:8081"]
+      - targets: ["rs485-to-grpc:8080"]
   - job_name: "smart_home"
     metrics_path: /actuator/prometheus
     scrape_interval: 30s
     static_configs:
-      - targets: ["smart-home:8082"]
+      - targets: ["smart-home:8080"]
 
 
 # Alertmanager configuration
