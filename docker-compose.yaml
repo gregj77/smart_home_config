@@ -38,6 +38,7 @@ services:
       - "/data/smart_home_config/grafana_source.yaml:/etc/grafana/provisioning/datasources/primary.yaml"
       - "/data/smart_home_config/grafana_dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml"
       - "/data/smart_home_config/dashboards/spring-boot-statistics_rev2.json:/smart_home/dashboards/spring-boot-statistics_rev2.json"
+      - "/data/smart_home_config/dashboards/smart-home.json:/smart_home/dashboards/smart-home.json"
     restart: always
   mysql:
     image: mysql:8.0.27
