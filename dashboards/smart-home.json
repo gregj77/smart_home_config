@@ -21,8 +21,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "gnetId": null,
-  "graphTooltip": 0,
-  "id": 2,
+  "graphTooltip": 1,
+  "iteration": 1637797625603,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -32,27 +32,18 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "continuous-GrYlRd"
           },
+          "decimals": 0,
           "mappings": [],
+          "max": 6000,
+          "min": -6000,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "green",
-                "value": 500
-              },
-              {
-                "color": "yellow",
-                "value": 2000
-              },
-              {
-                "color": "red",
-                "value": 4000
               }
             ]
           },
@@ -61,7 +52,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 5,
         "w": 3,
         "x": 0,
         "y": 0
@@ -102,24 +93,14 @@
             "mode": "continuous-RdYlGr"
           },
           "mappings": [],
+          "max": 6000,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 1000
-              },
-              {
-                "color": "yellow",
-                "value": 2500
-              },
-              {
                 "color": "green",
-                "value": 6000
+                "value": null
               }
             ]
           },
@@ -128,7 +109,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 5,
         "w": 3,
         "x": 3,
         "y": 0
@@ -151,7 +132,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "instant_production",
+          "expr": "instant_production{application=\"smarthome\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -159,6 +140,238 @@
       ],
       "title": "Energy Production",
       "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {
+          "titleSize": 15
+        }
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
+          "interval": "",
+          "legendFormat": "Energy Import ${__to:date:YYYY-MM-DD}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Energy export ${__to:date:YYYY-MM-DD}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Total Production ${__to:date:YYYY-MM-DD}",
+          "refId": "C"
+        }
+      ],
+      "title": "Current Day statistics ${__to:date:YYYY-MM-DD}",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 9,
+        "x": 15,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": false,
+        "text": {}
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "1 - max(\n  (\n    increase(power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]) / \n    increase(energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])\n  ) or on() vector(0))",
+          "interval": "",
+          "legendFormat": "Energy auto-consumption",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "1 - max(\n  (\n    increase(power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]) /\n    increase(power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])\n  ) or on() vector(0))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Import vs. export energy",
+          "refId": "B"
+        }
+      ],
+      "title": "Production Details",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": -1,
+            "drawStyle": "line",
+            "fillOpacity": 14,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepBefore",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${aggregation_interval}])",
+          "interval": "",
+          "legendFormat": "Energy import",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${aggregation_interval}])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Energy export",
+          "refId": "B"
+        }
+      ],
+      "title": "Import / Export energy ",
+      "type": "timeseries"
     },
     {
       "datasource": null,
@@ -221,7 +434,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 13
       },
       "id": 2,
       "options": {
@@ -260,15 +473,100 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "77995",
+          "value": "77995"
+        },
+        "datasource": null,
+        "definition": "query_result(business_day_up) \n",
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "business_day_up",
+        "options": [],
+        "query": {
+          "query": "query_result(business_day_up) \n",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "/.* (?<value>\\d+) .*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": false,
+          "text": "60m",
+          "value": "60m"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "label": "Aggregation interval",
+        "name": "aggregation_interval",
+        "options": [
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": false,
+            "text": "15m",
+            "value": "15m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": true,
+            "text": "60m",
+            "value": "60m"
+          },
+          {
+            "selected": false,
+            "text": "2h",
+            "value": "2h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          }
+        ],
+        "query": "5m,15m,30m,60m,2h,6h,12h",
+        "queryValue": "",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
+      }
+    ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Smart Home",
   "uid": "sydu2Spnk",
-  "version": 4
+  "version": 1
 }
