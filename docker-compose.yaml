@@ -24,6 +24,8 @@ services:
     user: "65534:1001"
     ports:
       - "8088:9090"
+    environment:
+      - "TZ=Europe/Warsaw"
     volumes:
       - "/data/smart_home_config/prometheus.yaml:/etc/prometheus/prometheus.yml"
       - "prometheus_data:/prometheus"
@@ -48,6 +50,7 @@ services:
     restart: always
     environment:
       - "MYSQL_RANDOM_ROOT_PASSWORD=yes"
+      - "TZ=Europe/Warsaw"
     env_file:
       - "/data/secrets/mysql.env"
     volumes:
@@ -56,11 +59,12 @@ services:
     image: pejs77/grpc-modbus-adapter:1.0.46
     ports:
       - "8081:8080"
-#      - "9090:9090"
+      - "9090:9090"
 #      - "5005:5005"
 #      - "6001:6001"
     environment:
       - "SPRING_PROFILES_ACTIVE=home"
+      - "TZ=Europe/Warsaw"
     volumes:
       - "/data/smart_home_config/grpc_modbus_application-home.yaml:/BOOT-INF/classes/application-home.yaml"
     devices:
@@ -72,13 +76,15 @@ services:
       timeout: 10s
       retries: 5
   smart-home:
-    image: pejs77/smart-home:1.0.7
+    image: pejs77/smart-home:1.0.10
     ports:
       - "8082:8080"
     environment:
-      - "SPRING_PROFILES_ACTIVE=home"
+      - "SPRING_PROFILES_ACTIVE=home,local"
+      - "TZ=Europe/Warsaw"
     volumes:
       - "/data/smart_home_config/smart_home_application-home.yaml:/BOOT-INF/classes/application-home.yaml"
+      - "/data/secrets/application-local.properties:/BOOT-INF/classes/application-local.properties"
     depends_on:
       - "rs485-to-grpc"
       - "mysql"
