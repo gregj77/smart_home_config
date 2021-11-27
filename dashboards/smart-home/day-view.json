@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1637797625603,
+  "iteration": 1638005269433,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -150,16 +150,14 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "max": 40,
+          "min": 3,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -185,17 +183,23 @@
           "values": false
         },
         "showUnfilled": true,
-        "text": {
-          "titleSize": 15
-        }
+        "text": {}
       },
       "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
+          "expr": "increase(power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])+\n(increase(energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]) - increase(power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Consumed",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
           "expr": "increase(power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
           "interval": "",
-          "legendFormat": "Energy Import ${__to:date:YYYY-MM-DD}",
+          "legendFormat": "Import ",
           "refId": "A"
         },
         {
@@ -203,7 +207,7 @@
           "expr": "increase(power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
           "hide": false,
           "interval": "",
-          "legendFormat": "Energy export ${__to:date:YYYY-MM-DD}",
+          "legendFormat": "Export",
           "refId": "B"
         },
         {
@@ -211,11 +215,11 @@
           "expr": "increase(energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
           "hide": false,
           "interval": "",
-          "legendFormat": "Total Production ${__to:date:YYYY-MM-DD}",
+          "legendFormat": "Production ",
           "refId": "C"
         }
       ],
-      "title": "Current Day statistics ${__to:date:YYYY-MM-DD}",
+      "title": "Current Day energy statistics ${__to:date:YYYY-MM-DD}",
       "type": "bargauge"
     },
     {
@@ -478,8 +482,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "77995",
-          "value": "77995"
+          "text": "38395",
+          "value": "38395"
         },
         "datasource": null,
         "definition": "query_result(business_day_up) \n",
@@ -561,7 +565,7 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now/d",
     "to": "now"
   },
   "timepicker": {},
