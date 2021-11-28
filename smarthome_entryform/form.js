@@ -8,6 +8,7 @@ class App extends HTMLElement {
     }
 
     async connectedCallback() {
+        console.log("connected!");
         this.innerHTML = "<b>" + "await this.foo()" + "</b>"
     }
 
@@ -28,9 +29,12 @@ class App extends HTMLElement {
             request.send();
         });
     }
-
-
 }
 
-window.customElements.define('my-app-element', App);
+//if (window.customElements.get('my-app-element') === undefined) {
+//  console.log("already loaded!");
+//} else {
+  console.log("loading custom element!");
+  window.customElements.define('my-app-element', App);
+//}
 console.log("loaded!");
