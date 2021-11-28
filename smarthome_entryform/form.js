@@ -64,6 +64,7 @@ class App extends HTMLElement {
             let request = new XMLHttpRequest();
             request.open("POST", url);
             request.setRequestHeader('Authorization', accessToken);
+            request.setRequestHeader('Content-Type', 'application/json');
             request.onload = (evt) => {
                 if (this.status >= 200 && this.status < 300) {
                     resolve(request.response);
@@ -74,7 +75,7 @@ class App extends HTMLElement {
             request.onerror = (evt) => {
                 reject({ status: this.status, statusText: request.statusText });
             }
-            request.send(data);
+            request.send(JSON.stringify(data)); 
         });
     }
 }
