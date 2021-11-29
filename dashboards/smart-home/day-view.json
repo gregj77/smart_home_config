@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1638005269433,
+  "iteration": 1638221455337,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -189,7 +189,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])+\n(increase(energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]) - increase(power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]))",
+          "expr": "increase(daily_power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])+\n(increase(daily_energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]) - increase(daily_power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Consumed",
@@ -197,14 +197,14 @@
         },
         {
           "exemplar": true,
-          "expr": "increase(power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
+          "expr": "increase(daily_power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
           "interval": "",
           "legendFormat": "Import ",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "increase(power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
+          "expr": "increase(daily_power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
           "hide": false,
           "interval": "",
           "legendFormat": "Export",
@@ -212,7 +212,7 @@
         },
         {
           "exemplar": true,
-          "expr": "increase(energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
+          "expr": "increase(daily_energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
           "hide": false,
           "interval": "",
           "legendFormat": "Production ",
@@ -221,6 +221,63 @@
       ],
       "title": "Current Day energy statistics ${__to:date:YYYY-MM-DD}",
       "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 12,
+        "y": 0
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "(last_power_storage_reading * 0.8) - (electricity_imported_since_last_reading) + (electricity_exported_since_last_reading * 0.8)",
+          "interval": "",
+          "legendFormat": "Energy Warehouse ",
+          "refId": "A"
+        }
+      ],
+      "title": "Energy Warehouse",
+      "type": "stat"
     },
     {
       "datasource": null,
@@ -270,14 +327,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "1 - max(\n  (\n    increase(power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]) / \n    increase(energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])\n  ) or on() vector(0))",
+          "expr": "1 - max(\n  (\n    increase(daily_power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]) / \n    increase(daily_energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])\n  ) or on() vector(0))",
           "interval": "",
           "legendFormat": "Energy auto-consumption",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "1 - max(\n  (\n    increase(power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]) /\n    increase(power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])\n  ) or on() vector(0))",
+          "expr": "1 - max(\n  (\n    increase(daily_power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]) /\n    increase(daily_power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])\n  ) or on() vector(0))",
           "hide": false,
           "interval": "",
           "legendFormat": "Import vs. export energy",
@@ -360,14 +417,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${aggregation_interval}])",
+          "expr": "increase(daily_power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${aggregation_interval}])",
           "interval": "",
           "legendFormat": "Energy import",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "increase(power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${aggregation_interval}])",
+          "expr": "increase(daily_power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${aggregation_interval}])",
           "hide": false,
           "interval": "",
           "legendFormat": "Energy export",
@@ -482,8 +539,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "38395",
-          "value": "38395"
+          "text": "81478",
+          "value": "81478"
         },
         "datasource": null,
         "definition": "query_result(business_day_up) \n",
