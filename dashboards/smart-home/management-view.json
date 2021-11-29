@@ -1,0 +1,92 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 5,
+  "iteration": 1638223939169,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": null,
+      "description": "",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "content": "    <script src=\"/smarthome/entryform/form.js\"></script>\n    <hr>\n    <style type=\"text/css\">\n        .smart-home-form {\n            margin: 15px;\n        }\n        .smart-home-row {\n            margin: 10px;\n            display: flex;\n            height: 35px;\n            text-align: right;\n            line-height: 65px;\n        }\n        .smart-home-row label {\n            display: block;\n            width: 100px;\n            padding-right: 10px;\n        }\n        .smart-home-row input {\n            width: 150px;\n            height: 30px;\n        }\n        .smart-home-row select {\n            width: 150px;\n        }\n    </style>\n    <smart-home-meter-reading data-access-token=\"[[accessToken]]\" data-submit-uri=\"/smarthome/api/v1/referenceState\"></smart-home-meter-reading>\n    <hr>",
+        "mode": "html"
+      },
+      "pluginVersion": "8.2.5",
+      "title": "Smart home meter reading form",
+      "type": "text"
+    }
+  ],
+  "schemaVersion": 32,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "8587364666204008000",
+          "value": "8587364666204008000"
+        },
+        "datasource": null,
+        "definition": "query_result(access_token)",
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "accessToken",
+        "options": [],
+        "query": {
+          "query": "query_result(access_token)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/.* (?<value>\\d+) .*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Management Dashboard",
+  "uid": "WoKKBQpnz",
+  "version": 3
+}
