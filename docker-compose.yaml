@@ -38,7 +38,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-#      - "grafana_data:/var/lib/grafana"
+      - "grafana_data:/var/lib/grafana"
       - "/data/smart_home_config/grafana.ini:/etc/grafana/grafana.ini"
       - "/data/smart_home_config/grafana_source.yaml:/etc/grafana/provisioning/datasources/primary.yaml"
       - "/data/smart_home_config/grafana_dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml"

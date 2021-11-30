@@ -19,6 +19,12 @@ scrape_configs:
       - targets: ["smart-home:8080"]
         labels:
           application: "smarthome"
+  - job_name: "grafana"
+    metrics_path: /grafana/metrics
+    static_configs:
+       - targets: ["grafana:3000"]
+         labels:
+           application: "grafana"
 
 
 # Alertmanager configuration
