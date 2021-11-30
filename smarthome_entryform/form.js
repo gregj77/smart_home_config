@@ -39,7 +39,7 @@ class SmartHomeMeterReading extends HTMLElement {
                 "   <input type='submit' value='SAVE'>" +
                 " </div>" +
                 "</form>" +
-                "<div id='result-msg' class='smart-home-result'></div>" +
+                "<div id='result-msg' class='smart-home-result'><span id='statusResult' class='result-status'></span>&nbsp;<span id='statusMessage' class='result-message'></span></div>" +
                 "</div>";
 
             this.addEventListener("submit", (e) => this.formSubmit(e, this.getAttribute('data-access-token'), url));
@@ -63,7 +63,8 @@ class SmartHomeMeterReading extends HTMLElement {
             try {
                 await this.submitReading(data, accessToken, url);
             } catch (e) {
-                document.getElementById('result-msg').innerHTML = e;
+                document.getElementById('statusResult').innerText = ('status' in e ? e.status : '');
+                document.getElementById('statusMessage').innerText = ('statusText' in e ? e.statusText : '');
             }
         }
     }
@@ -79,7 +80,7 @@ class SmartHomeMeterReading extends HTMLElement {
                 if (this.status >= 200 && this.status < 300) {
                     resolve(request.response);
                 } else {
-                    reject(request.response);
+                    reject({ status: request.status + ' ' + request.statusText, statusText: JSON.stringify(request.response)});
                 }
             }
             request.onerror = (evt) => {
