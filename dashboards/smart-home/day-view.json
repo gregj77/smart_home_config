@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1638221455337,
+  "iteration": 1638309505468,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -253,7 +253,7 @@
       "id": 14,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
@@ -539,8 +539,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "81478",
-          "value": "81478"
+          "text": "82766",
+          "value": "82766"
         },
         "datasource": null,
         "definition": "query_result(business_day_up) \n",
@@ -629,5 +629,5 @@
   "timezone": "",
   "title": "Current day view",
   "uid": "sydu2Spnk",
-  "version": 1
+  "version": 2
 }
