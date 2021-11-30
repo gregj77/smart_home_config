@@ -1,7 +1,20 @@
 <html>
 <body>
 
+    <input type="number" id="accessToken">
+    <input type="button" id="updateToken" value="Update Token">
     <script src="form.js"></script>
+    <script>
+        let btn = document.getElementById("updateToken");
+        let accessToken = document.getElementById("accessToken");
+
+        btn.onclick = function () {
+            let token = accessToken.value;
+            console.log("current token value: " + token);
+            let form = document.getElementById("form");
+            form.setAttribute("data-access-token", token);
+        }
+    </script>
     <hr>
     <style type="text/css">
         .smart-home-form {
@@ -25,7 +38,7 @@
             width: 150px;
         }
     </style>
-    <smart-home-meter-reading data-access-token="5665968114827399168" data-submit-uri="/smarthome/api/v1/referenceState"></smart-home-meter-reading>
+    <smart-home-meter-reading data-access-token="5665968114827399168" data-submit-uri="/smarthome/api/v1/referenceState" id="form"></smart-home-meter-reading>
     <hr>
 </body>
 </html>
