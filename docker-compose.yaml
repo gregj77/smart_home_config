@@ -79,7 +79,7 @@ services:
       timeout: 10s
       retries: 5
   smart-home:
-    image: pejs77/smart-home:1.0.11
+    image: pejs77/smart-home:1.0.13
     ports:
       - "8082:8080"
     environment:
