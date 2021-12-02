@@ -23,8 +23,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 6,
-  "iteration": 1638311977074,
+  "iteration": 1638474990761,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -94,6 +93,14 @@
           "interval": "",
           "legendFormat": "Total export",
           "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(daily_energy_production_total)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Total production",
+          "refId": "D"
         }
       ],
       "title": "Totals for all recorded days",
@@ -235,6 +242,150 @@
         "x": 0,
         "y": 15
       },
+      "id": 76,
+      "panels": [
+        {
+          "datasource": null,
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "axisGridShow": true,
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMin": 0,
+                "fillOpacity": 61,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1
+              },
+              "decimals": 1,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "dark-green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "kwatth"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 24,
+            "x": 0,
+            "y": 16
+          },
+          "id": 52,
+          "options": {
+            "barWidth": 0.87,
+            "groupWidth": 0.7,
+            "legend": {
+              "calcs": [],
+              "displayMode": "hidden",
+              "placement": "bottom"
+            },
+            "orientation": "horizontal",
+            "showValue": "always",
+            "stacking": "none",
+            "text": {},
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "label_replace(max by (date, type) (daily_power_import_total{date=~\"$days\"}), \"type\", \"Import\", \"date\", \"(.*)\")",
+              "interval": "",
+              "legendFormat": "{{date}}-{{type}}",
+              "refId": "A"
+            },
+            {
+              "exemplar": true,
+              "expr": "label_replace(max by (date,type) (daily_power_export_total{date=~\"$days\"}), \"type\",\n\"Export\", \"date\", \"(.*)\")",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{date}}-{{type}}",
+              "refId": "B"
+            }
+          ],
+          "title": "Import vs. Export",
+          "transformations": [
+            {
+              "disabled": true,
+              "id": "labelsToFields",
+              "options": {
+                "valueLabel": "date"
+              }
+            },
+            {
+              "id": "reduce",
+              "options": {
+                "includeTimeField": false,
+                "labelsToFields": false,
+                "mode": "seriesToRows",
+                "reducers": [
+                  "max"
+                ]
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Field": false,
+                  "Max": false
+                },
+                "indexByName": {},
+                "renameByName": {
+                  "Field": "date",
+                  "Max": "value",
+                  "date": "dfgdfg"
+                }
+              }
+            },
+            {
+              "id": "sortBy",
+              "options": {
+                "fields": {},
+                "sort": [
+                  {
+                    "desc": true,
+                    "field": "date"
+                  }
+                ]
+              }
+            }
+          ],
+          "type": "barchart"
+        }
+      ],
+      "title": "Import vs. Export",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
       "id": 4,
       "panels": [
         {
@@ -369,5 +520,5 @@
   "timezone": "",
   "title": "Daily History View",
   "uid": "IJR4N9pnk",
-  "version": 7
+  "version": 1
 }
