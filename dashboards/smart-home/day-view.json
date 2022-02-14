@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1638309505468,
+  "iteration": 1644863931215,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -34,7 +34,7 @@
           "color": {
             "mode": "continuous-GrYlRd"
           },
-          "decimals": 0,
+          "decimals": 1,
           "mappings": [],
           "max": 6000,
           "min": -6000,
@@ -92,6 +92,7 @@
           "color": {
             "mode": "continuous-RdYlGr"
           },
+          "decimals": 1,
           "mappings": [],
           "max": 6000,
           "min": 0,
@@ -167,7 +168,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 6,
+        "w": 12,
         "x": 6,
         "y": 0
       },
@@ -247,7 +248,7 @@
       "gridPos": {
         "h": 5,
         "w": 3,
-        "x": 12,
+        "x": 18,
         "y": 0
       },
       "id": 14,
@@ -305,8 +306,8 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 9,
-        "x": 15,
+        "w": 3,
+        "x": 21,
         "y": 0
       },
       "id": 12,
@@ -335,13 +336,13 @@
         {
           "exemplar": true,
           "expr": "1 - max(\n  (\n    increase(daily_power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]) /\n    increase(daily_power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])\n  ) or on() vector(0))",
-          "hide": false,
+          "hide": true,
           "interval": "",
           "legendFormat": "Import vs. export energy",
           "refId": "B"
         }
       ],
-      "title": "Production Details",
+      "title": "Auto consumption",
       "type": "bargauge"
     },
     {
@@ -539,8 +540,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "82766",
-          "value": "82766"
+          "text": "71166",
+          "value": "71166"
         },
         "datasource": null,
         "definition": "query_result(business_day_up) \n",
@@ -629,5 +630,5 @@
   "timezone": "",
   "title": "Current day view",
   "uid": "sydu2Spnk",
-  "version": 2
+  "version": 1
 }

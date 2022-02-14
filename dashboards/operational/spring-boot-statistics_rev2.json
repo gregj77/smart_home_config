@@ -23,17 +23,13 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 6756,
   "graphTooltip": 0,
-  "iteration": 1637613772990,
+  "iteration": 1644866229895,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "collapsed": false,
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -335,15 +331,19 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "process_files_open{application=\"$application\", instance=\"$instance\"}",
+          "exemplar": true,
+          "expr": "process_files_open_files{application=\"$application\", instance=\"$instance\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Open Files",
           "refId": "A"
         },
         {
-          "expr": "process_files_max{application=\"$application\", instance=\"$instance\"}",
+          "exemplar": true,
+          "expr": "process_files_max_files{application=\"$application\", instance=\"$instance\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Max Files",
           "refId": "B"
@@ -667,10 +667,6 @@
     {
       "collapsed": false,
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -800,6 +796,99 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
+      "hiddenSeries": false,
+      "id": 80,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.2.5",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "irate(jvm_classes_unloaded_classes_total{instance=\"$instance\", application=\"$application\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Classes Unloaded",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Classes Unloaded",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "smart-home",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
         "w": 6,
         "x": 0,
         "y": 23
@@ -836,22 +925,28 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "jvm_memory_used_bytes{instance=\"$instance\", application=\"$application\", id=\"$memory_pool_nonheap\"}",
+          "exemplar": true,
+          "expr": "jvm_memory_used_bytes{instance=\"$instance\", application=\"$application\", id=~\"$memory_pool_nonheap\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Used",
           "refId": "C"
         },
         {
-          "expr": "jvm_memory_committed_bytes{instance=\"$instance\", application=\"$application\", id=\"$memory_pool_nonheap\"}",
+          "exemplar": true,
+          "expr": "jvm_memory_committed_bytes{instance=\"$instance\", application=\"$application\", id=~\"$memory_pool_nonheap\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Commited",
           "refId": "A"
         },
         {
-          "expr": "jvm_memory_max_bytes{instance=\"$instance\", application=\"$application\", id=\"$memory_pool_nonheap\"}",
+          "exemplar": true,
+          "expr": "jvm_memory_max_bytes{instance=\"$instance\", application=\"$application\", id=~ \"$memory_pool_nonheap\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Max",
           "refId": "B"
@@ -907,195 +1002,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 23
-      },
-      "hiddenSeries": false,
-      "id": 80,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.2.5",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "irate(jvm_classes_unloaded_total{instance=\"$instance\", application=\"$application\"}[5m])",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Classes Unloaded",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Classes Unloaded",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "smart-home",
-      "decimals": 0,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 39
-      },
-      "hiddenSeries": false,
-      "id": 50,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.2.5",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "jvm_classes_loaded{instance=\"$instance\", application=\"$application\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Classes Loaded",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Classes Loaded",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "locale",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "smart-home",
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 39
+        "y": 23
       },
       "hiddenSeries": false,
       "id": 83,
@@ -1193,7 +1103,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 46
+        "y": 30
       },
       "hiddenSeries": false,
       "id": 78,
@@ -1285,13 +1195,109 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "smart-home",
+      "decimals": 0,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 31
+      },
+      "hiddenSeries": false,
+      "id": 50,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.2.5",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "jvm_classes_loaded_classes{instance=\"$instance\", application=\"$application\"}",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Classes Loaded",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Classes Loaded",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "locale",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "smart-home",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 47
+        "y": 39
       },
       "hiddenSeries": false,
       "id": 82,
@@ -1389,7 +1395,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 54
+        "y": 46
       },
       "hiddenSeries": false,
       "id": 68,
@@ -1421,22 +1427,28 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "jvm_threads_daemon{instance=\"$instance\", application=\"$application\"}",
+          "exemplar": true,
+          "expr": "jvm_threads_daemon_threads{instance=\"$instance\", application=\"$application\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Daemon",
           "refId": "A"
         },
         {
-          "expr": "jvm_threads_live{instance=\"$instance\", application=\"$application\"}",
+          "exemplar": true,
+          "expr": "jvm_threads_live_threads{instance=\"$instance\", application=\"$application\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Live",
           "refId": "B"
         },
         {
-          "expr": "jvm_threads_peak{instance=\"$instance\", application=\"$application\"}",
+          "exemplar": true,
+          "expr": "jvm_threads_peak_threads{instance=\"$instance\", application=\"$application\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Peak",
           "refId": "C"
@@ -1486,15 +1498,11 @@
     {
       "collapsed": false,
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 62
+        "y": 54
       },
       "id": 72,
       "panels": [],
@@ -1513,7 +1521,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 63
+        "y": 55
       },
       "hiddenSeries": false,
       "id": 74,
@@ -1607,7 +1615,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 63
+        "y": 55
       },
       "hiddenSeries": false,
       "id": 76,
@@ -1692,15 +1700,11 @@
     {
       "collapsed": false,
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 73
+        "y": 65
       },
       "id": 34,
       "panels": [],
@@ -1747,7 +1751,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 74
+        "y": 66
       },
       "id": 44,
       "interval": null,
@@ -1793,7 +1797,7 @@
         "h": 8,
         "w": 20,
         "x": 4,
-        "y": 74
+        "y": 66
       },
       "hiddenSeries": false,
       "id": 36,
@@ -1929,7 +1933,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 78
+        "y": 70
       },
       "id": 46,
       "interval": null,
@@ -1975,7 +1979,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 82
+        "y": 74
       },
       "hiddenSeries": false,
       "id": 38,
@@ -2066,7 +2070,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 82
+        "y": 74
       },
       "hiddenSeries": false,
       "id": 42,
@@ -2157,7 +2161,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 82
+        "y": 74
       },
       "hiddenSeries": false,
       "id": 40,
@@ -2239,15 +2243,11 @@
     {
       "collapsed": false,
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 88
+        "y": 80
       },
       "id": 18,
       "panels": [],
@@ -2266,7 +2266,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 89
+        "y": 81
       },
       "hiddenSeries": false,
       "id": 4,
@@ -2299,8 +2299,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(http_server_requests_seconds_count{instance=\"$instance\", application=\"$application\", uri!~\".*actuator.*\"}[5m])",
+          "exemplar": true,
+          "expr": "increase(http_server_requests_seconds_count{instance=\"$instance\", application=\"$application\"}[$__interval])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{method}} [{{status}}] - {{uri}}",
           "refId": "A"
@@ -2360,7 +2362,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 96
+        "y": 88
       },
       "hiddenSeries": false,
       "id": 2,
@@ -2393,8 +2395,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(http_server_requests_seconds_sum{instance=\"$instance\", application=\"$application\", exception=\"None\", uri!~\".*actuator.*\"}[5m]) / irate(http_server_requests_seconds_count{instance=\"$instance\", application=\"$application\", exception=\"None\", uri!~\".*actuator.*\"}[5m])",
+          "exemplar": true,
+          "expr": "irate(http_server_requests_seconds_sum{instance=\"$instance\", application=\"$application\", exception=\"None\"}[5m]) / irate(http_server_requests_seconds_count{instance=\"$instance\", application=\"$application\", exception=\"None\"}[5m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{method}} [{{status}}] - {{uri}}",
           "refId": "A"
@@ -2444,15 +2448,11 @@
     {
       "collapsed": false,
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 103
+        "y": 95
       },
       "id": 22,
       "panels": [],
@@ -2499,7 +2499,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 104
+        "y": 96
       },
       "id": 28,
       "interval": null,
@@ -2546,7 +2546,7 @@
         "h": 7,
         "w": 9,
         "x": 4,
-        "y": 104
+        "y": 96
       },
       "hiddenSeries": false,
       "id": 24,
@@ -2640,7 +2640,7 @@
         "h": 7,
         "w": 11,
         "x": 13,
-        "y": 104
+        "y": 96
       },
       "hiddenSeries": false,
       "id": 26,
@@ -2767,7 +2767,7 @@
         "h": 3,
         "w": 4,
         "x": 0,
-        "y": 108
+        "y": 100
       },
       "id": 32,
       "interval": null,
@@ -2813,7 +2813,7 @@
         "h": 7,
         "w": 13,
         "x": 0,
-        "y": 111
+        "y": 103
       },
       "hiddenSeries": false,
       "id": 30,
@@ -2903,15 +2903,11 @@
     {
       "collapsed": false,
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 118
+        "y": 110
       },
       "id": 8,
       "panels": [],
@@ -2930,7 +2926,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 119
+        "y": 111
       },
       "hiddenSeries": false,
       "id": 6,
@@ -3024,7 +3020,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 119
+        "y": 111
       },
       "hiddenSeries": false,
       "id": 10,
@@ -3118,7 +3114,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 126
+        "y": 118
       },
       "hiddenSeries": false,
       "id": 14,
@@ -3212,7 +3208,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 126
+        "y": 118
       },
       "hiddenSeries": false,
       "id": 16,
@@ -3306,7 +3302,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 126
+        "y": 118
       },
       "hiddenSeries": false,
       "id": 20,
@@ -3399,15 +3395,15 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "smart-home:8080",
-          "value": "smart-home:8080"
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "smart-home",
         "definition": "label_values(jvm_classes_loaded_classes, instance)",
         "description": null,
         "error": null,
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Instance",
         "multi": false,
         "name": "instance",
@@ -3428,9 +3424,10 @@
       {
         "allValue": null,
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "smarthome",
-          "value": "smarthome"
+          "text": "None",
+          "value": ""
         },
         "datasource": "smart-home",
         "definition": "label_values(jvm_classes_loaded_classes{instance=\"$instance\"}, application)",
@@ -3458,9 +3455,10 @@
       {
         "allValue": null,
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "HikariPool-1",
-          "value": "HikariPool-1"
+          "text": "None",
+          "value": ""
         },
         "datasource": "smart-home",
         "definition": "label_values(hikaricp_connections{instance=\"$instance\", application=\"$application\"}, pool)",
@@ -3548,7 +3546,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
