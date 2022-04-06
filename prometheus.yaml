@@ -14,7 +14,7 @@ scrape_configs:
           application: rs485adapter
   - job_name: "smart_home"
     metrics_path: /actuator/prometheus
-    scrape_interval: 30s
+    scrape_interval: 10s
     static_configs:
       - targets: ["smart-home:8080"]
         labels:

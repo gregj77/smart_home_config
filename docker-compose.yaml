@@ -60,7 +60,7 @@ services:
     volumes:
       - "mysql_data:/var/lib/mysql"
   rs485-to-grpc:
-    image: pejs77/grpc-modbus-adapter:1.0.46
+    image: pejs77/grpc-modbus-adapter:1.0.65
     ports:
       - "8081:8080"
       - "9090:9090"
