@@ -10,7 +10,7 @@ devices:
     - name: ProductionMeter
       id: 1
       serialPort: /dev/ttyUSB0
-      deviceFunctions: [TOTAL_POWER, EXPORT_POWER, IMPORT_POWER, CURRENT_POWER]
+      deviceFunctions: [TOTAL_POWER, EXPORT_POWER, IMPORT_POWER, CURRENT_POWER, CURRENT_VOLTAGE_PHASE1, CURRENT_VOLTAGE_PHASE2, CURRENT_VOLTAGE_PHASE3]
     - name: MainMeter
       id: 2
       serialPort: /dev/ttyUSB0
