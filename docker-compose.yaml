@@ -22,7 +22,7 @@ services:
       - /data/certbot/log:/var/log
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 24h & wait $${!}; done;'"
   prometheus:
-    image: prom/prometheus:v2.31.1
+    image: prom/prometheus:v2.35.0
     user: "65534:1001"
     ports:
       - "8088:9090"
@@ -33,7 +33,7 @@ services:
       - "prometheus_data:/prometheus"
     restart: always
   grafana:
-    image: grafana/grafana-oss:8.2.5
+    image: grafana/grafana-oss:8.2.7
     user: "472:1001"
     ports:
       - "3000:3000"
