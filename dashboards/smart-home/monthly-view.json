@@ -22,8 +22,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 10,
-  "iteration": 1644866010663,
+  "iteration": 1652567258214,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -82,7 +81,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 6,
+        "w": 4,
         "x": 0,
         "y": 0
       },
@@ -101,7 +100,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.2.7",
       "repeat": "month_period",
       "repeatDirection": "h",
       "targets": [
@@ -135,6 +134,14 @@
           "interval": "",
           "legendFormat": "Production",
           "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "monthly_power_import_total{date=\"$month_period\"} - (0.8 * monthly_power_export_total{date=\"$month_period\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Storage DELTA",
+          "refId": "E"
         }
       ],
       "title": "Statistics for $month_period",
@@ -187,5 +194,5 @@
   "timezone": "",
   "title": "Monthly Status",
   "uid": "VZ7Dx6-nk",
-  "version": 7
+  "version": 1
 }
