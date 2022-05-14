@@ -1,6 +1,7 @@
 logging:
   level:
     com.gcs: INFO
+    com.gcs.gRPCModbusAdapter.functions: WARN
 ports:
   entries:
     - name: /dev/ttyUSB0

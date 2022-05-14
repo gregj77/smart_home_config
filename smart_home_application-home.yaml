@@ -1,3 +1,6 @@
+logging:
+  level:
+    com.gcs: INFO
 grpc:
   client:
     modbusServiceAdapter:
@@ -9,17 +12,29 @@ monitoring:
     - deviceName: ProductionMeter
       functions:
         - functionName: "CURRENT_POWER"
-          readInterval: 15
+          readInterval: 10
           alias: "Instant Production"
           readingType: com.gcs.smarthome.logic.ElectricReading.InstantProductionPower
         - functionName: EXPORT_POWER
           readInterval: 300
           alias: "Energy Production"
           readingType: com.gcs.smarthome.logic.ElectricReading.ProducedPower
+        - functionName: CURRENT_VOLTAGE_PHASE1
+          readInterval: 60
+          alias: "Voltage_Phase_1"
+          readingType: com.gcs.smarthome.logic.ElectricReading.CurrentVoltage
+        - functionName: CURRENT_VOLTAGE_PHASE2
+          readInterval: 60
+          alias: "Voltage_Phase_2"
+          readingType: com.gcs.smarthome.logic.ElectricReading.CurrentVoltage
+        - functionName: CURRENT_VOLTAGE_PHASE3
+          readInterval: 60
+          alias: "Voltage_Phase_3"
+          readingType: com.gcs.smarthome.logic.ElectricReading.CurrentVoltage        
     - deviceName: MainMeter
       functions:
         - functionName: CURRENT_POWER
-          readInterval: 15
+          readInterval: 10
           alias: "Instant Power Balance"
           readingType: com.gcs.smarthome.logic.ElectricReading.InstantTotalPower
         - functionName: IMPORT_POWER

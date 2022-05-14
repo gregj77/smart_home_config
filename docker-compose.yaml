@@ -81,7 +81,7 @@ services:
       timeout: 10s
       retries: 5
   smart-home:
-    image: pejs77/smart-home:1.0.16
+    image: pejs77/smart-home:1.0.49
     ports:
       - "8082:8080"
  #     - "5005:5005"
