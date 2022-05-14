@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1644863931215,
+  "iteration": 1652563609208,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -190,7 +190,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(daily_power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])+\n(increase(daily_energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]) - increase(daily_power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s]))",
+          "expr": "daily_power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}+\n(daily_energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"} - daily_power_export_total{date=\"${__to:date:YYYY-MM-DD}\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "Consumed",
@@ -198,14 +198,14 @@
         },
         {
           "exemplar": true,
-          "expr": "increase(daily_power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
+          "expr": "daily_power_import_total{date=\"${__to:date:YYYY-MM-DD}\"}",
           "interval": "",
           "legendFormat": "Import ",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "increase(daily_power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
+          "expr": "daily_power_export_total{date=\"${__to:date:YYYY-MM-DD}\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Export",
@@ -213,7 +213,7 @@
         },
         {
           "exemplar": true,
-          "expr": "increase(daily_energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}[${business_day_up}s])",
+          "expr": "daily_energy_production_total{date=\"${__to:date:YYYY-MM-DD}\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Production ",
@@ -540,8 +540,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "71166",
-          "value": "71166"
+          "text": "84400",
+          "value": "84400"
         },
         "datasource": null,
         "definition": "query_result(business_day_up) \n",
@@ -630,5 +630,5 @@
   "timezone": "",
   "title": "Current day view",
   "uid": "sydu2Spnk",
-  "version": 1
+  "version": 2
 }
