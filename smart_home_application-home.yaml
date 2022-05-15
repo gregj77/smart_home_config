@@ -12,7 +12,7 @@ monitoring:
     - deviceName: ProductionMeter
       functions:
         - functionName: "CURRENT_POWER"
-          readInterval: 10
+          readInterval: 15
           alias: "Instant Production"
           readingType: com.gcs.smarthome.logic.ElectricReading.InstantProductionPower
         - functionName: EXPORT_POWER
@@ -34,7 +34,7 @@ monitoring:
     - deviceName: MainMeter
       functions:
         - functionName: CURRENT_POWER
-          readInterval: 10
+          readInterval: 15
           alias: "Instant Power Balance"
           readingType: com.gcs.smarthome.logic.ElectricReading.InstantTotalPower
         - functionName: IMPORT_POWER
