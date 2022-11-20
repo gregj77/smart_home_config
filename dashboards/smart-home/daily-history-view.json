@@ -23,7 +23,8 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1638474990761,
+  "id": 4,
+  "iteration": 1668956248686,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -69,7 +70,7 @@
         "showThresholdMarkers": false,
         "text": {}
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.2.7",
       "targets": [
         {
           "exemplar": true,
@@ -161,7 +162,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sort_desc(topk(4, avg by (date) (daily_power_import_total + daily_energy_production_total - daily_power_export_total)  )) ",
+          "expr": "sort_desc(topk(5, avg by (date) (daily_power_import_total + daily_energy_production_total - daily_power_export_total)  )) ",
           "interval": "",
           "legendFormat": "Top consumption {{date}}",
           "refId": "A"
@@ -378,7 +379,7 @@
       "type": "row"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
@@ -387,91 +388,90 @@
         "y": 16
       },
       "id": 4,
-      "panels": [
-        {
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "decimals": 1,
-              "mappings": [],
-              "max": 40,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "kwatth"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 24,
-            "x": 0,
-            "y": 1
-          },
-          "id": 2,
-          "options": {
-            "orientation": "vertical",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": false,
-            "text": {}
-          },
-          "pluginVersion": "8.2.5",
-          "targets": [
-            {
-              "exemplar": true,
-              "expr": "daily_power_import_total{date=\"$days\"} + \n(daily_energy_production_total{date=\"$days\"} - daily_power_export_total{date=\"$days\"})",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "Consumption total",
-              "refId": "B"
-            },
-            {
-              "exemplar": true,
-              "expr": "daily_power_import_total{date=\"$days\"}",
-              "interval": "",
-              "legendFormat": "Import total",
-              "refId": "A"
-            },
-            {
-              "exemplar": true,
-              "expr": "daily_energy_production_total{date=\"$days\"}",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "Production total",
-              "refId": "C"
-            },
-            {
-              "exemplar": true,
-              "expr": "daily_power_export_total{date=\"$days\"}",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "Export total",
-              "refId": "D"
-            }
-          ],
-          "title": "Consumption, production, import & export",
-          "type": "gauge"
-        }
-      ],
+      "panels": [],
       "repeat": "days",
       "title": "Day  [[days]]",
       "type": "row"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 40,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 2,
+      "options": {
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false,
+        "text": {}
+      },
+      "pluginVersion": "8.2.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "daily_power_import_total{date=\"$days\"} + \n(daily_energy_production_total{date=\"$days\"} - daily_power_export_total{date=\"$days\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Consumption total",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "daily_power_import_total{date=\"$days\"}",
+          "interval": "",
+          "legendFormat": "Import total",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "daily_energy_production_total{date=\"$days\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Production total",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "daily_power_export_total{date=\"$days\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Export total",
+          "refId": "D"
+        }
+      ],
+      "title": "Consumption, production, import & export",
+      "type": "gauge"
     }
   ],
   "schemaVersion": 32,
@@ -507,7 +507,7 @@
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 1,
+        "sort": 2,
         "type": "query"
       }
     ]

@@ -22,10 +22,121 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1652567477790,
+  "id": 6,
+  "iteration": 1668956344802,
   "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 30,
+      "panels": [],
+      "title": "Yearly Status",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 44,
+      "options": {
+        "displayMode": "basic",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.7",
+      "repeat": "year_period",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(monthly_power_import_total{year=\"$year_period\"})",
+          "interval": "",
+          "legendFormat": "Import",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(monthly_power_export_total{year=\"$year_period\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Export",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(monthly_power_import_total{year=\"$year_period\"}) + sum((monthly_energy_production_total{year=\"$year_period\"}) - sum(monthly_power_export_total{year=\"$year_period\"}))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Production",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum((monthly_power_import_total{year=\"$year_period\"}) - (0.8 * sum(monthly_power_export_total{year=\"$year_period\"}))) * -1",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Storage DELTA",
+          "refId": "D"
+        }
+      ],
+      "title": "Statistics for $year_period",
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 16,
+      "panels": [],
+      "title": "Monthly Status",
+      "type": "row"
+    },
     {
       "datasource": null,
       "description": "",
@@ -82,7 +193,7 @@
         "h": 5,
         "w": 4,
         "x": 0,
-        "y": 0
+        "y": 7
       },
       "id": 2,
       "maxPerRow": 6,
@@ -167,7 +278,7 @@
         "definition": "monthly_power_import_total",
         "description": null,
         "error": null,
-        "hide": 1,
+        "hide": 2,
         "includeAll": true,
         "label": null,
         "multi": true,
@@ -180,7 +291,38 @@
         "refresh": 2,
         "regex": "/.*date=\"(?<value>[^\"]+)\"*./",
         "skipUrlSync": false,
-        "sort": 1,
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": null,
+        "definition": "monthly_power_import_total",
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "year_period",
+        "options": [],
+        "query": {
+          "query": "monthly_power_import_total",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "/.*year=\"(?<value>[^\"]+)\"*./",
+        "skipUrlSync": false,
+        "sort": 2,
         "type": "query"
       }
     ]
@@ -193,5 +335,5 @@
   "timezone": "",
   "title": "Monthly Status",
   "uid": "VZ7Dx6-nk",
-  "version": 2
+  "version": 3
 }
