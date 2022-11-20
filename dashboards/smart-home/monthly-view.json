@@ -23,7 +23,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 6,
-  "iteration": 1668956344802,
+  "iteration": 1668957298445,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -91,6 +91,7 @@
         {
           "exemplar": true,
           "expr": "sum(monthly_power_import_total{year=\"$year_period\"})",
+          "hide": false,
           "interval": "",
           "legendFormat": "Import",
           "refId": "A"
@@ -105,7 +106,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(monthly_power_import_total{year=\"$year_period\"}) + sum((monthly_energy_production_total{year=\"$year_period\"}) - sum(monthly_power_export_total{year=\"$year_period\"}))",
+          "expr": "sum(monthly_power_import_total{year=\"$year_period\"}) + (sum(monthly_energy_production_total{year=\"$year_period\"}) - sum(monthly_power_export_total{year=\"$year_period\"}))",
           "hide": false,
           "interval": "",
           "legendFormat": "Production",
@@ -113,8 +114,8 @@
         },
         {
           "exemplar": true,
-          "expr": "sum((monthly_power_import_total{year=\"$year_period\"}) - (0.8 * sum(monthly_power_export_total{year=\"$year_period\"}))) * -1",
-          "hide": false,
+          "expr": "(sum(monthly_power_import_total{year=\"$year_period\"}) - (0.8 * sum(monthly_power_export_total{year=\"$year_period\"}))) * -1",
+          "hide": true,
           "interval": "",
           "legendFormat": "Storage DELTA",
           "refId": "D"
@@ -258,6 +259,7 @@
       "type": "bargauge"
     }
   ],
+  "refresh": "",
   "schemaVersion": 32,
   "style": "dark",
   "tags": [],
@@ -335,5 +337,5 @@
   "timezone": "",
   "title": "Monthly Status",
   "uid": "VZ7Dx6-nk",
-  "version": 3
+  "version": 4
 }
