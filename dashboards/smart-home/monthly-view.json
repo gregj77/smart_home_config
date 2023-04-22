@@ -22,8 +22,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 6,
-  "iteration": 1668957298445,
+  "iteration": 1682155717649,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -49,8 +48,9 @@
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 3,
+          "decimals": 2,
           "mappings": [],
+          "max": 10000,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -66,7 +66,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 1
       },
@@ -106,7 +106,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(monthly_power_import_total{year=\"$year_period\"}) + (sum(monthly_energy_production_total{year=\"$year_period\"}) - sum(monthly_power_export_total{year=\"$year_period\"}))",
+          "expr": "sum(monthly_energy_production_total{year=\"$year_period\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "Production",
@@ -337,5 +337,5 @@
   "timezone": "",
   "title": "Monthly Status",
   "uid": "VZ7Dx6-nk",
-  "version": 4
+  "version": 5
 }
