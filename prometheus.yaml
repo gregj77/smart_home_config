@@ -25,6 +25,12 @@ scrape_configs:
        - targets: ["grafana:3000"]
          labels:
            application: "grafana"
+  - job_name: "rasperry_pi"
+    metrics_path: /metrics
+    static_configs:
+       - targets: ["192.168.0.9:9100"]
+         labels:
+           application: "nas"
 
 
 # Alertmanager configuration
