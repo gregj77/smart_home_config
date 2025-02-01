@@ -27,6 +27,7 @@ scrape_configs:
            application: "grafana"
   - job_name: "rasperry_pi"
     metrics_path: /metrics
+    scrape_interval: 20s
     static_configs:
        - targets: ["192.168.0.99:9100"]
          labels:

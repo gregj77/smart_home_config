@@ -22,7 +22,6 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 11,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -460,6 +459,7 @@
       "type": "stat"
     }
   ],
+  "refresh": "10s",
   "schemaVersion": 32,
   "style": "dark",
   "tags": [],
@@ -467,12 +467,12 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "NAS",
   "uid": "6xxBbWKNk",
-  "version": 3
+  "version": 4
 }
