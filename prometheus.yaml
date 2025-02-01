@@ -28,7 +28,13 @@ scrape_configs:
   - job_name: "rasperry_pi"
     metrics_path: /metrics
     static_configs:
-       - targets: ["192.168.0.9:9100"]
+       - targets: ["192.168.0.99:9100"]
+         labels:
+           application: "nas"
+  - job_name: "rasperry_pi_smart"
+    metrics_path: /metrics
+    static_configs:
+       - targets: ["192.168.0.99:9633"]
          labels:
            application: "nas"
 
