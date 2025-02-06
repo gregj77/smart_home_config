@@ -404,7 +404,6 @@
     },
     {
       "datasource": null,
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -419,7 +418,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -429,7 +429,7 @@
         "x": 12,
         "y": 16
       },
-      "id": 4,
+      "id": 14,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -449,13 +449,21 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "max(node_filesystem_files{application=\"nas\", device=\"/dev/md0\"} / 1000)\n",
+          "expr": "sum by(device) (irate(node_network_receive_bytes_total{device=\"eth0\"} [1m]))",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "Receive {{device}}",
           "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum by(device) (irate(node_network_transmit_bytes_total{device=\"eth0\"} [1m]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Send {{device}}",
+          "refId": "B"
         }
       ],
-      "title": "Stored Files (in thousans)",
+      "title": "Network traffic",
       "type": "stat"
     }
   ],
@@ -474,5 +482,5 @@
   "timezone": "",
   "title": "NAS",
   "uid": "6xxBbWKNk",
-  "version": 4
+  "version": 5
 }
