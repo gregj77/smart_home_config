@@ -135,14 +135,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by(device) (rate(node_network_receive_bytes_total{device=\"eth0\"} [1m]))",
+          "expr": "sum by(device) (rate(node_network_receive_bytes_total{device=\"end0\"} [1m]))",
           "interval": "",
           "legendFormat": "Receive {{device}}",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum by(device) (rate(node_network_transmit_bytes_total{device=\"eth0\"} [1m]))",
+          "expr": "sum by(device) (rate(node_network_transmit_bytes_total{device=\"end0\"} [1m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Send {{device}}",
