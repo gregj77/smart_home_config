@@ -54,7 +54,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 4,
         "x": 0,
         "y": 0
       },
@@ -86,6 +86,70 @@
         }
       ],
       "title": "CPU Usage",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "binBps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 4,
+        "y": 0
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum by(device) (rate(node_network_receive_bytes_total{device=\"eth0\"} [1m]))",
+          "interval": "",
+          "legendFormat": "Receive {{device}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum by(device) (rate(node_network_transmit_bytes_total{device=\"eth0\"} [1m]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Send {{device}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Network traffic",
       "type": "stat"
     },
     {
@@ -328,7 +392,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "smartctl_device_temperature{application=\"nas\"}",
+          "expr": "max by (device) (smartctl_device_temperature{application=\"nas\"})",
           "interval": "",
           "legendFormat": "{{device}}",
           "refId": "A"
@@ -419,7 +483,7 @@
               }
             ]
           },
-          "unit": "binBps"
+          "unit": "decbytes"
         },
         "overrides": []
       },
@@ -429,10 +493,10 @@
         "x": 12,
         "y": 16
       },
-      "id": 14,
+      "id": 16,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
@@ -449,21 +513,22 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by(device) (irate(node_network_receive_bytes_total{device=\"eth0\"} [1m]))",
+          "expr": "node_filesystem_free_bytes{device=\"/dev/md0\"} offset 7d- node_filesystem_free_bytes{device=\"/dev/md0\"}",
+          "hide": false,
           "interval": "",
-          "legendFormat": "Receive {{device}}",
-          "refId": "A"
+          "legendFormat": "7 day",
+          "refId": "B"
         },
         {
           "exemplar": true,
-          "expr": "sum by(device) (irate(node_network_transmit_bytes_total{device=\"eth0\"} [1m]))",
+          "expr": "node_filesystem_free_bytes{device=\"/dev/md0\"} offset 24h - node_filesystem_free_bytes{device=\"/dev/md0\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "Send {{device}}",
-          "refId": "B"
+          "legendFormat": "1 day",
+          "refId": "C"
         }
       ],
-      "title": "Network traffic",
+      "title": "Storage consumption",
       "type": "stat"
     }
   ],
@@ -475,12 +540,12 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "NAS",
   "uid": "6xxBbWKNk",
-  "version": 5
+  "version": 6
 }
