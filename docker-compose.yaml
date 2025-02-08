@@ -24,7 +24,7 @@ services:
     image: prom/prometheus:v2.42.0
     user: "65534:1001"
     ports:
-      - "8088:9090"
+      - "9090:9090"
     environment:
       - "TZ=Europe/Warsaw"
     volumes:
@@ -37,8 +37,8 @@ services:
   grafana:
     image: grafana/grafana-oss:8.2.7
     user: "472:1001"
-    ports:
-      - "3000:3000"
+#    ports:
+#      - "3000:3000"
     volumes:
       - "grafana_data:/var/lib/grafana"
       - "/data/smart_home_config/grafana.ini:/etc/grafana/grafana.ini"
@@ -63,9 +63,9 @@ services:
       - "mysql_data:/var/lib/mysql"
   rs485-to-grpc:
     image: pejs77/grpc-modbus-adapter:1.0.97
-    ports:
-      - "8081:8080"
-      - "9090:9090"
+#    ports:
+#      - "8081:8080"
+#      - "9090:9090"
 #      - "5005:5005"
 #      - "6001:6001"
     environment:
@@ -84,9 +84,9 @@ services:
       retries: 5
   smart-home:
     image: pejs77/smart-home:1.0.53
-    ports:
-      - "8082:8080"
- #     - "5005:5005"
+#    ports:
+#      - "8082:8080"
+#      - "5005:5005"
     environment:
       - "SPRING_PROFILES_ACTIVE=home,local"
 #      - "_JAVA_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
@@ -104,8 +104,8 @@ services:
       retries: 5
   next-cloud:
     image: nextcloud:30.0.5
-    ports:
-      - "7777:80"
+#    ports:
+#      - "7777:80"
     restart: always
     volumes:
       - data_folder:/var/www/html
