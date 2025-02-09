@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx:1.15-alpine
+    image: nginx:stable-alpine
     restart: unless-stopped
     volumes:
       - /data/smart_home_config/nginx_app.conf:/etc/nginx/conf.d/app.conf
@@ -11,15 +11,14 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    command: "/bin/sh -c 'trap exit TERM; while :; do sleep 8h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   certbot:
     image: certbot/certbot
-    restart: unless-stopped
+    restart: no
     volumes:
       - /data/certbot/conf:/etc/letsencrypt
       - /data/certbot/www:/var/www/certbot
       - /data/certbot/log:/var/log
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 24h & wait $${!}; done;'"
+    entrypoint: "/bin/sh -c 'certbot renew'"
   prometheus:
     image: prom/prometheus:v2.42.0
     user: "65534:1001"
@@ -104,8 +103,6 @@ services:
       retries: 5
   next-cloud:
     image: nextcloud:30.0.5
-#    ports:
-#      - "7777:80"
     restart: always
     volumes:
       - data_folder:/var/www/html
