@@ -513,7 +513,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_filesystem_free_bytes{device=\"/dev/md0\"} offset 7d- node_filesystem_free_bytes{device=\"/dev/md0\"}",
+          "expr": "avg by (device) (node_filesystem_free_bytes{device=\"/dev/md0\"} offset 7d) - avg by (device) (node_filesystem_free_bytes{device=\"/dev/md0\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "7 day",
@@ -521,7 +521,7 @@
         },
         {
           "exemplar": true,
-          "expr": "node_filesystem_free_bytes{device=\"/dev/md0\"} offset 24h - node_filesystem_free_bytes{device=\"/dev/md0\"}",
+          "expr": "avg by (device) (node_filesystem_free_bytes{device=\"/dev/md0\"} offset 24h) - avg by (device) (node_filesystem_free_bytes{device=\"/dev/md0\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "1 day",
@@ -540,12 +540,12 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "NAS",
   "uid": "6xxBbWKNk",
-  "version": 6
+  "version": 8
 }
