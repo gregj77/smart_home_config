@@ -77,14 +77,15 @@ services:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      test: ["CMD", "curl", "-fsS", "http://rs485-to-grpc:8080/actuator/health"]
       interval: 90s
       timeout: 10s
       retries: 5
+      start_period: 30s
   smart-home:
     image: pejs77/smart-home:1.0.53
-#    ports:
-#      - "8082:8080"
+    ports:
+      - "8082:8080"
 #      - "5005:5005"
     environment:
       - "SPRING_PROFILES_ACTIVE=home,local"
@@ -97,10 +98,11 @@ services:
       - "rs485-to-grpc"
       - "mysql"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+      test: ["CMD", "curl", "-fsS", "http://smart-home:8080/actuator/health"]
       interval: 90s
       timeout: 10s
       retries: 5
+      start_period: 30s
   next-cloud:
     image: nextcloud:30.0.5
     restart: always
