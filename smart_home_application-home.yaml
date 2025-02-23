@@ -7,6 +7,11 @@ grpc:
       address: "static://rs485-to-grpc:9090"
       negotiationType: PLAINTEXT
 
+spring:
+  datasource:
+    hikari:
+      initialization-fail-timeout=30000
+
 monitoring:
   electricityDevices:
     - deviceName: ProductionMeter
@@ -30,7 +35,7 @@ monitoring:
         - functionName: CURRENT_VOLTAGE_PHASE3
           readInterval: 60
           alias: "Voltage_Phase_3"
-          readingType: com.gcs.smarthome.logic.ElectricReading.CurrentVoltage        
+          readingType: com.gcs.smarthome.logic.ElectricReading.CurrentVoltage
     - deviceName: MainMeter
       functions:
         - functionName: CURRENT_POWER
