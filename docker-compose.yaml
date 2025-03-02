@@ -61,8 +61,9 @@ services:
     volumes:
       - "mysql_data:/var/lib/mysql"
   rs485-to-grpc:
-    image: pejs77/grpc-modbus-adapter:1.0.107-SNAPSHOT
+    image: pejs77/grpc-modbus-adapter:1.0.138
     ports:
+#      - "1099:1099"
 #      - "8081:8080"
 #      - "9090:9090"
       - "5005:5005"
@@ -70,9 +71,11 @@ services:
     environment:
       - "SPRING_PROFILES_ACTIVE=home,v2Driver"
       - "TZ=Europe/Warsaw"
-      - "_JAVA_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+#      - "_JAVA_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+#      - "_JAVA_OPTIONS=-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
     volumes:
       - "/data/smart_home_config/grpc_modbus_application-home.yaml:/BOOT-INF/classes/application-home.yaml"
+      - logs_folder:/var/log/app
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
     restart: always
@@ -151,3 +154,9 @@ volumes:
       o: bind,ro
       type: none
       device: /mnt/nas/data/Pictures
+  logs_folder:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /data/var/rs485

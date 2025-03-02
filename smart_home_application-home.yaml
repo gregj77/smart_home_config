@@ -21,19 +21,19 @@ monitoring:
           alias: "Instant Production"
           readingType: com.gcs.smarthome.logic.ElectricReading.InstantProductionPower
         - functionName: EXPORT_POWER
-          readInterval: 300
+          readInterval: 600
           alias: "Energy Production"
           readingType: com.gcs.smarthome.logic.ElectricReading.ProducedPower
         - functionName: CURRENT_VOLTAGE_PHASE1
-          readInterval: 60
+          readInterval: 300
           alias: "Voltage_Phase_1"
           readingType: com.gcs.smarthome.logic.ElectricReading.CurrentVoltage
         - functionName: CURRENT_VOLTAGE_PHASE2
-          readInterval: 60
+          readInterval: 300
           alias: "Voltage_Phase_2"
           readingType: com.gcs.smarthome.logic.ElectricReading.CurrentVoltage
         - functionName: CURRENT_VOLTAGE_PHASE3
-          readInterval: 60
+          readInterval: 300
           alias: "Voltage_Phase_3"
           readingType: com.gcs.smarthome.logic.ElectricReading.CurrentVoltage
     - deviceName: MainMeter
@@ -43,10 +43,10 @@ monitoring:
           alias: "Instant Power Balance"
           readingType: com.gcs.smarthome.logic.ElectricReading.InstantTotalPower
         - functionName: IMPORT_POWER
-          readInterval: 300
+          readInterval: 600
           alias: "Power Import"
           readingType: com.gcs.smarthome.logic.ElectricReading.ImportedPower
         - functionName: EXPORT_POWER
-          readInterval: 300
+          readInterval: 600
           alias: "Power Export"
           readingType: com.gcs.smarthome.logic.ElectricReading.ExportedPower
