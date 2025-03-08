@@ -1,6 +1,6 @@
 logging:
   level:
-    com.gcs: WARN
+    com.gcs: INFO
 ports:
   entries:
     - name: /dev/ttyUSB0
