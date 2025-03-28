@@ -8,6 +8,12 @@ ports:
       dataBits: 8
       parity: NONE
       stopBits: STOPBITS_1
+server:
+  jetty:
+    threads:
+      max: 5
+      min: 1
+      idle-timeout: 60000
 devices:
   entries:
     - name: ProductionMeter
