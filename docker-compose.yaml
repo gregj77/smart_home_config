@@ -112,6 +112,7 @@ services:
     volumes:
       - data_folder:/var/www/html
       - pictures_folder:/pictures:ro
+      - ania_video_folder:/ania_video:ro
     environment:
       - "PHP_MEMORY_LIMIT:512M"
     depends_on:
@@ -160,6 +161,12 @@ volumes:
       o: bind,ro
       type: none
       device: /mnt/nas/data/Pictures
+  ania_video_folder:
+    driver: local
+    driver_opts:
+      o: bind,ro
+      type: none
+      device: /mnt/nas/data/Ania_Video
   logs_folder:
     driver: local
     driver_opts:
