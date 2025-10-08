@@ -21,13 +21,12 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "gnetId": null,
-  "graphTooltip": 1,
+  "graphTooltip": 0,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": null,
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -63,7 +62,7 @@
           },
           "mappings": [],
           "max": 250,
-          "min": 210,
+          "min": 215,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -137,7 +136,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisGridShow": true,
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -166,7 +164,6 @@
               "mode": "off"
             }
           },
-          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -249,7 +246,7 @@
         },
         {
           "exemplar": true,
-          "expr": "amperage_phase_1 + amperage_phase_2 + amperage_phase_3",
+          "expr": "amperage_phase_3 + amperage_phase_2 + amperage_phase_1",
           "hide": false,
           "interval": "",
           "legendFormat": "Total",
@@ -313,7 +310,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 8,
         "w": 24,
         "x": 0,
         "y": 17
@@ -359,5 +356,5 @@
   "timezone": "",
   "title": "Volts and Amps",
   "uid": "0_JOXmeNk",
-  "version": 1
+  "version": 2
 }
