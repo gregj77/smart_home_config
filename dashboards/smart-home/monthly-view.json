@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1682155717649,
+  "iteration": 1762551323755,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -90,7 +90,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(monthly_power_import_total{year=\"$year_period\"})",
+          "expr": "sum(monthly_power_import{year=\"$year_period\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "Import",
@@ -98,7 +98,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(monthly_power_export_total{year=\"$year_period\"})",
+          "expr": "sum(monthly_power_export{year=\"$year_period\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "Export",
@@ -106,7 +106,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(monthly_energy_production_total{year=\"$year_period\"})",
+          "expr": "sum(monthly_energy_production{year=\"$year_period\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "Production",
@@ -114,7 +114,7 @@
         },
         {
           "exemplar": true,
-          "expr": "(sum(monthly_power_import_total{year=\"$year_period\"}) - (0.8 * sum(monthly_power_export_total{year=\"$year_period\"}))) * -1",
+          "expr": "(sum(monthly_power_import{year=\"$year_period\"}) - (0.8 * sum(monthly_power_export{year=\"$year_period\"}))) * -1",
           "hide": true,
           "interval": "",
           "legendFormat": "Storage DELTA",
@@ -217,14 +217,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "monthly_power_import_total{date=\"$month_period\"}",
+          "expr": "monthly_power_import{date=\"$month_period\"}",
           "interval": "",
           "legendFormat": "Import",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "monthly_power_export_total{date=\"$month_period\"}",
+          "expr": "monthly_power_export{date=\"$month_period\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Export",
@@ -232,7 +232,7 @@
         },
         {
           "exemplar": true,
-          "expr": "monthly_power_import_total{date=\"$month_period\"} + (monthly_energy_production_total{date=\"$month_period\"} - monthly_power_export_total{date=\"$month_period\"})",
+          "expr": "monthly_power_import{date=\"$month_period\"} + (monthly_energy_production{date=\"$month_period\"} - monthly_power_export{date=\"$month_period\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "Consumption",
@@ -240,7 +240,7 @@
         },
         {
           "exemplar": true,
-          "expr": "monthly_energy_production_total{date=\"$month_period\"}",
+          "expr": "monthly_energy_production{date=\"$month_period\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Production",
@@ -248,7 +248,7 @@
         },
         {
           "exemplar": true,
-          "expr": "(monthly_power_import_total{date=\"$month_period\"} - (0.8 * monthly_power_export_total{date=\"$month_period\"})) * -1",
+          "expr": "(monthly_power_import{date=\"$month_period\"} - (0.8 * monthly_power_export{date=\"$month_period\"})) * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "Storage DELTA",
@@ -277,7 +277,7 @@
           ]
         },
         "datasource": null,
-        "definition": "monthly_power_import_total",
+        "definition": "label_values(monthly_power_import{application=\"smarthome\"}, date)",
         "description": null,
         "error": null,
         "hide": 2,
@@ -287,11 +287,11 @@
         "name": "month_period",
         "options": [],
         "query": {
-          "query": "monthly_power_import_total",
+          "query": "label_values(monthly_power_import{application=\"smarthome\"}, date)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
-        "regex": "/.*date=\"(?<value>[^\"]+)\"*./",
+        "regex": "",
         "skipUrlSync": false,
         "sort": 2,
         "type": "query"
@@ -308,7 +308,7 @@
           ]
         },
         "datasource": null,
-        "definition": "monthly_power_import_total",
+        "definition": "label_values(monthly_power_import{application=\"smarthome\"}, year)",
         "description": null,
         "error": null,
         "hide": 2,
@@ -318,11 +318,11 @@
         "name": "year_period",
         "options": [],
         "query": {
-          "query": "monthly_power_import_total",
+          "query": "label_values(monthly_power_import{application=\"smarthome\"}, year)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
-        "regex": "/.*year=\"(?<value>[^\"]+)\"*./",
+        "regex": "",
         "skipUrlSync": false,
         "sort": 2,
         "type": "query"
@@ -330,12 +330,12 @@
     ]
   },
   "time": {
-    "from": "now-6h",
-    "to": "now"
+    "from": "now/fy",
+    "to": "now/fy"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Monthly Status",
   "uid": "VZ7Dx6-nk",
-  "version": 5
+  "version": 6
 }
