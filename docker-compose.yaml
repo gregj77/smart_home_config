@@ -107,7 +107,7 @@ services:
       retries: 5
       start_period: 30s
   next-cloud:
-    image: nextcloud:30.0.5
+    image: nextcloud:33.0.1
     restart: always
     volumes:
       - data_folder:/var/www/html
