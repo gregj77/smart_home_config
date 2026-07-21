@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(greg-office.tplinkdns.com)
+domains=(greg-office.ddns.net)
 rsa_key_size=4096
 data_path="/data/certbot"
 email="greg_j@live.com" # Adding a valid address is strongly recommended
