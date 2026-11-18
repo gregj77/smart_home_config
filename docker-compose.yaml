@@ -20,7 +20,7 @@ services:
       - /data/certbot/log:/var/log
     entrypoint: "/bin/sh -c 'certbot renew'"
   prometheus:
-    image: prom/prometheus:v2.42.0
+    image: prom/prometheus:v3.16.0
     user: "65534:1001"
     ports:
       - "9090:9090"
@@ -34,7 +34,7 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--web.external-url=http://prometheus:8088/prometheus/'
   grafana:
-    image: grafana/grafana-oss:8.2.7
+    image: grafana/grafana-oss:13.0.2
     user: "472:1001"
 #    ports:
 #      - "3000:3000"
@@ -48,7 +48,7 @@ services:
       - "grafana_dashboards:/grafana_dashboards"
     restart: always
   mysql:
-    image: arm64v8/mysql:8.0.41
+    image: arm64v8/mysql:8.4.13
     user: "0:1001"
     ports:
       - "3306:3306"
@@ -107,7 +107,7 @@ services:
       retries: 5
       start_period: 30s
   next-cloud:
-    image: nextcloud:33.0.1
+    image: nextcloud:35.0.3
     restart: always
     volumes:
       - data_folder:/var/www/html
